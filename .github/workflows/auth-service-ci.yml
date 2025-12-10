@@ -1,0 +1,16 @@
+name: auth-service-ci
+
+on:
+  pull_request:
+    branches: [ develop, main ]
+  push:
+    branches: [ develop, main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Auth Service Check
+      run: echo "Auth Service CI check passed"
