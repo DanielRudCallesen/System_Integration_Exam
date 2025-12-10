@@ -4,8 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Auth_service</RootNamespace>
-    <UserSecretsId>cea95a21-d9ce-440a-9d4d-c1bd441c3847</UserSecretsId>
+    <UserSecretsId>89e7051b-58c5-4e97-8c15-8fdff0fe70d2</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
