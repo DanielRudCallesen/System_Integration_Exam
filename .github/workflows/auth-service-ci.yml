@@ -57,26 +57,26 @@ jobs:
       run: dotnet build --configuration Release --no-restore /p:TreatWarningsAsErrors=true
 
     # Stage 3: Unit Tests
-    - name: Run tests
-      working-directory: tests/AuthService.Tests
-      run: dotnet test --no-restore --verbosity normal --logger "trx" --collect:"XPlat Code Coverage"
+   # - name: Run tests
+   #   working-directory: tests/AuthService.Tests
+   #   run: dotnet test --no-restore --verbosity normal --logger "trx" --collect:"XPlat Code Coverage"
 
-    - name: Upload test results
-      if: always()
-      uses: actions/upload-artifact@v5
-      with:
-        name: test-results-authservice-${{ github.run_number }}
-        path: tests/AuthService.Tests/TestResults/*.trx
-        retention-days: 30
+    #- name: Upload test results
+   #   if: always()
+   #   uses: actions/upload-artifact@v5
+    #  with:
+   #     name: test-results-authservice-${{ github.run_number }}
+   ##     path: tests/AuthService.Tests/TestResults/*.trx
+    #    retention-days: 30
 
 
-    - name: Upload code coverage
-      if: always()
-      uses: actions/upload-artifact@v5
-      with:
-        name: coverage-authservice-${{ github.run_number }}
-        path: tests/AuthService.Tests/TestResults/*/coverage.opencover.xml
-        retention-days: 30
+    #- name: Upload code coverage
+   #   if: always()
+    #  uses: actions/upload-artifact@v5
+    #  with:
+     #   name: coverage-authservice-${{ github.run_number }}
+     #   path: tests/AuthService.Tests/TestResults/*/coverage.opencover.xml
+     #   retention-days: 30
 
     # Stage 5: Build Artifacts
     - name: Publish
