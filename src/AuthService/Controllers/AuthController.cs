@@ -78,7 +78,6 @@ namespace AuthService.Controllers
                 userId,
                 authenticated = User.Identity?.IsAuthenticated ?? false
             });
-
         }
     }
 }
