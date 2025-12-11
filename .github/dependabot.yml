@@ -1,0 +1,179 @@
+version: 2
+updates:
+  # NuGet packages - Auth Service
+  - package-ecosystem: "nuget"
+    directory: "/src/AuthService"
+    schedule: 
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "nuget"
+      - "authservice"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    # Group minor and patch updates together
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # NuGet packages - Product Service
+  - package-ecosystem: "nuget"
+    directory: "/src/ProductService"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "nuget"
+      - "productservice"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # NuGet packages - Gateway Service
+  - package-ecosystem: "nuget"
+    directory: "/src/GatewayService"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "nuget"
+      - "gatewayservice"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # NuGet packages - Test Projects
+  - package-ecosystem: "nuget"
+    directory: "/tests/AuthService.Tests"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "nuget"
+      - "tests"
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: "nuget"
+    directory: "/tests/ProductService.Tests"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "nuget"
+      - "tests"
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: "nuget"
+    directory: "/tests/GatewayService.Tests"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "nuget"
+      - "tests"
+    commit-message:
+      prefix: "chore(deps)"
+
+  # GitHub Actions - Monitor workflow dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "ci-cd"
+    commit-message:
+      prefix: "ci(deps)"
+      include: "scope"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  # Docker base images - Auth Service
+  - package-ecosystem: "docker"
+    directory: "/src/AuthService"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"
+      - "authservice"
+    commit-message:
+      prefix: "chore(docker)"
+
+  # Docker base images - Product Service
+  - package-ecosystem: "docker"
+    directory: "/src/ProductService"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"
+      - "productservice"
+    commit-message:
+      prefix: "chore(docker)"
+
+  # Docker base images - Gateway Service
+  - package-ecosystem: "docker"
+    directory: "/src/GatewayService"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"
+      - "gatewayservice"
+    commit-message:
+      prefix: "chore(docker)"
