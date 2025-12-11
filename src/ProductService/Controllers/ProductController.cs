@@ -6,6 +6,5 @@ namespace ProductService.Controllers
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-       
     }
 }
