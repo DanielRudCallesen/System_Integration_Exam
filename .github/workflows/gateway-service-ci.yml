@@ -28,10 +28,10 @@ jobs:
     steps:
     # Stage 1: Checkout & Setup
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -63,7 +63,7 @@ jobs:
 
     - name: Upload test results
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: test-results-gatewayservice-${{ github.run_number }}
         path: tests/GatewayService.Tests/TestResults/*.trx
@@ -71,7 +71,7 @@ jobs:
 
     - name: Upload code coverage
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: coverage-gatewayservice-${{ github.run_number }}
         path: tests/GatewayService.Tests/TestResults/*/coverage.opencover.xml
@@ -83,7 +83,7 @@ jobs:
       run: dotnet publish --configuration Release --no-build --output ./publish
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: gatewayservice-build-${{ github.run_number }}
         path: src/GatewayService/publish/
@@ -105,7 +105,7 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     # Stage 6: Docker Build
     - name: Set up Docker Buildx
@@ -131,7 +131,7 @@ jobs:
 
     - name: Build and push Docker image
       id: build-push
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         context: ./src/GatewayService
         file: ./src/GatewayService/Dockerfile
@@ -150,7 +150,7 @@ jobs:
 
     # Stage 7: Image Scan
     - name: Scan image with Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.28.0
+      uses: aquasecurity/trivy-action@0.33.1
       with:
         image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-push.outputs.digest }}
         format: 'sarif'
@@ -159,7 +159,7 @@ jobs:
         exit-code: '0'
 
     - name: Upload scan results
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       if: always()
       with:
         sarif_file: 'trivy-results.sarif'
@@ -180,12 +180,12 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0
 
     - name: Create GitHub Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: gatewayservice-v1.0.${{ github.run_number }}
         name: Gateway Service v1.0.${{ github.run_number }}
