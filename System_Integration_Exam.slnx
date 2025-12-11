@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/AuthService/AuthService.csproj" />
+  <Project Path="src/GatewayService/GatewayService.csproj" />
+  <Project Path="src/ProductService/ProductService.csproj" />
+</Solution>
