@@ -32,7 +32,7 @@ namespace AuthService.Controllers
                 return BadRequest(new { error = "Username is required" });
             }
 
-            var jwtKey = _configuration["Jwt:Key"] ?? "MySecretKeyForDevelopment123456789";
+            var jwtKey = _configuration["Jwt:Key"] ?? "MySecretKeyForDevelopment12345678909";
             var jwtIssuer = _configuration["Jwt:Issuer"] ?? "AuthService";
             var jwtAudience = _configuration["Jwt:Audience"] ?? "MicroservicesApp";
 
