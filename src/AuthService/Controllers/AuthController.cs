@@ -12,7 +12,6 @@ namespace AuthService.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-
         public AuthController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -32,7 +31,7 @@ namespace AuthService.Controllers
                 return BadRequest(new { error = "Username is required" });
             }
 
-            var jwtKey = _configuration["Jwt:Key"] ?? "MySecretKeyForDevelopment123456789";
+            var jwtKey = _configuration["Jwt:Key"] ?? "MySecretKeyForDevelopment1234567890";
             var jwtIssuer = _configuration["Jwt:Issuer"] ?? "AuthService";
             var jwtAudience = _configuration["Jwt:Audience"] ?? "MicroservicesApp";
 
