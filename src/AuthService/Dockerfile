@@ -12,8 +12,8 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["AuthService/AuthService.csproj", "AuthService/"]
-RUN dotnet restore "./AuthService/AuthService.csproj"
+COPY ["AuthService.csproj", "./"]
+RUN dotnet restore "./AuthService.csproj"
 COPY . .
 RUN dotnet build "./AuthService.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
