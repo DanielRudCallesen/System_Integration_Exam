@@ -1,4 +1,4 @@
-﻿name: product-service-ci
+name: product-service-ci
 
 on:
   pull_request:

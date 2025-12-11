@@ -1,4 +1,4 @@
-﻿name: gateway-service-ci
+name: gateway-service-ci
 
 on:
   pull_request:
