@@ -1,0 +1,15 @@
+name: "CodeQL Configuration"
+
+# Paths to analyze
+paths:
+  - src/AuthService
+  - src/ProductService
+  - src/GatewayService
+
+# Paths to ignore
+paths-ignore:
+  - tests
+  - docs
+  - scripts
+  - '**/obj/**'
+  - '**/bin/**'
