@@ -1,14 +1,14 @@
-name: "CodeQL"
+﻿name: "CodeQL"
 
 on:
   push:
     branches: [ develop, main ]
   pull_request:
-    branches: [ develop, main ]
+    branches: [ develop, main ] 
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze Code
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -28,15 +28,34 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
+        config-file: ./.github/codeql/codeql-config.yml
+        queries: security-and-quality
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '10.0.x'
 
-    - name: Build
-      run: |
-        dotnet build Services/AuthService/AuthService.csproj --configuration Release
+    # Build all three services for CodeQL analysis
+    - name: Build Auth Service
+      run: dotnet build src/AuthService/AuthService.csproj --configuration Release
+      continue-on-error: false
+
+    - name: Build Product Service
+      run: dotnet build src/ProductService/ProductService.csproj --configuration Release
+      continue-on-error: false
+
+    - name: Build Gateway Service
+      run: dotnet build src/GatewayService/GatewayService.csproj --configuration Release
+      continue-on-error: false
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
+        upload: true
+
+    - name: CodeQL Analysis Complete
+      run: |
+        echo "CodeQL security analysis completed"
+        echo "View results in the Security tab"
