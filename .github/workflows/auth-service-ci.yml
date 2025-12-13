@@ -150,14 +150,16 @@ jobs:
         echo "${{ steps.meta.outputs.tags }}"
 
     # Stage 7: Image Scan
+    - name: Wait for image to be available
+      run: sleep 15
+
     - name: Scan image with Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.33.1
       with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-push.outputs.digest }}
+        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ github.sha }}
         format: 'sarif'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL,HIGH'
-        exit-code: '0'
 
     - name: Upload scan results
       uses: github/codeql-action/upload-sarif@v4
