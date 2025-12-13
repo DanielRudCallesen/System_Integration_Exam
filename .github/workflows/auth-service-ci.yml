@@ -150,9 +150,6 @@ jobs:
         echo "${{ steps.meta.outputs.tags }}"
 
     # Stage 7: Image Scan
-    - name: Wait for image to be available
-      run: sleep 15
-
     - name: Scan image with Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.33.1
       with:
