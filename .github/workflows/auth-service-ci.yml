@@ -153,7 +153,7 @@ jobs:
     - name: Scan image with Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.33.1
       with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-push.outputs.digest }}
+        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ github.sha }}
         format: 'sarif'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL,HIGH'
