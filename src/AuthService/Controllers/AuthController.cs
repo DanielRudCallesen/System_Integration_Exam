@@ -27,8 +27,7 @@ namespace AuthService.Controllers
         [HttpPost("token")]
         public IActionResult GenerateToken([FromBody] TokenRequest request)
         {
-
-            if(string.IsNullOrEmpty(request.Username))
+            if (string.IsNullOrEmpty(request.Username))
             {
                 return BadRequest(new { error = "Username is required" });
             }
