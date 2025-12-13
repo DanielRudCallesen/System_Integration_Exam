@@ -35,7 +35,7 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: 1Cache NuGet packages
+    - name: Cache NuGet packages
       uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
@@ -122,7 +122,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-push.outputs.digest }}
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
           type=ref,event=branch
           type=sha,prefix={{branch}}-
@@ -156,7 +156,6 @@ jobs:
         format: 'sarif'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL,HIGH'
-        exit-code: '0'
 
     - name: Upload scan results
       uses: github/codeql-action/upload-sarif@v4
@@ -166,7 +165,7 @@ jobs:
         category: 'container-scan-gatewayservice'
 
     - name: Docker build and scan completed
-      run: echo "Auth Service Docker image built, scanned, and pushed successfully"
+      run: echo "Gateway Service Docker image built, scanned, and pushed successfully"
 
   # Stage 9: Release (only on main branch)
   release:

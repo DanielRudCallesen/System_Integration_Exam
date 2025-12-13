@@ -12,7 +12,6 @@ namespace AuthService.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-
         public AuthController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -27,8 +26,7 @@ namespace AuthService.Controllers
         [HttpPost("token")]
         public IActionResult GenerateToken([FromBody] TokenRequest request)
         {
-
-            if(string.IsNullOrEmpty(request.Username))
+            if (string.IsNullOrEmpty(request.Username))
             {
                 return BadRequest(new { error = "Username is required" });
             }
