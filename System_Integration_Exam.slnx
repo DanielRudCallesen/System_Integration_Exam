@@ -1,8 +1,10 @@
 <Solution>
-  <Project Path="../../../../../../source/repos/System_Integration_Exam/src/AuthService/AuthService.csproj" />
-  <Project Path="../../../../../../source/repos/System_Integration_Exam/src/GatewayService/GatewayService.csproj" />
-  <Project Path="../../../../../../source/repos/System_Integration_Exam/src/ProductService/ProductService.csproj" />
-  <Project Path="../../../../../../source/repos/System_Integration_Exam/tests/AuthService.Tests/AuthService.Tests.csproj" />
-  <Project Path="../../../../../../source/repos/System_Integration_Exam/tests/GatewayService.Tests/GateService.Tests.csproj" />
-  <Project Path="../../../../../../source/repos/System_Integration_Exam/tests/ProductService.Tests/ProductService.Tests.csproj" />
+  <Folder Name="/Tests/">
+    <Project Path="tests/AuthService.Tests/AuthService.Tests.csproj" />
+    <Project Path="tests/GatewayService.Tests/GateService.Tests.csproj" />
+    <Project Path="tests/ProductService.Tests/ProductService.Tests.csproj" />
+  </Folder>
+  <Project Path="src/AuthService/AuthService.csproj" />
+  <Project Path="src/GatewayService/GatewayService.csproj" />
+  <Project Path="src/ProductService/ProductService.csproj" />
 </Solution>
