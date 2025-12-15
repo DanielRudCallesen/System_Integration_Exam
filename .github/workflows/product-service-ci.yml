@@ -2,13 +2,17 @@ name: product-service-ci
 
 on:
   pull_request:
-    branches: [ develop, main ]
+    branches: [ develop, master ]
     paths:
       - 'src/ProductService/**'
       - 'tests/ProductService.Tests/**'
       - '.github/workflows/product-service-ci.yml'
   push:
-    branches: [ develop, main]
+    branches: [ develop, master ]
+    paths:
+      - 'src/ProductService/**'
+      - 'tests/ProductService.Tests/**'
+      - '.github/workflows/product-service-ci.yml'
 
 env:
   DOTNET_VERSION: '10.0.x'
