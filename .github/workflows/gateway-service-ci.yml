@@ -145,7 +145,7 @@ jobs:
 
     - name: Image pushed successfully
       run: |
-        echo "Docker image pushed to GHCR:"
+        echo "Docker image pushed to GHCR_test:"
         echo "${{ steps.meta.outputs.tags }}"
 
     # # Stage 7: Image Scan
