@@ -32,7 +32,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Cache dependencies
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/AuthService.csproj') }}
@@ -61,7 +61,7 @@ jobs:
 
     - name: Upload test results
       if: always()
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
        name: test-results-authservice-${{ github.run_number }}
        path: tests/AuthService.Tests/TestResults/**/*.trx
@@ -70,7 +70,7 @@ jobs:
 
     - name: Upload code coverage
       if: always()
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: coverage-authservice-${{ github.run_number }}
         path: tests/AuthService.Tests/TestResults/**/coverage.cobertura.xml
@@ -82,7 +82,7 @@ jobs:
       run: dotnet publish --configuration Release --output ./publish
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: authservice-build-${{ github.run_number }}
         path: src/AuthService/publish/

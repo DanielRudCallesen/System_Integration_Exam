@@ -32,7 +32,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Cache NuGet packages
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/ProductService.csproj') }}
@@ -59,7 +59,7 @@ jobs:
 
    # - name: Upload test results
    #   if: always()
-   #   uses: actions/upload-artifact@v5
+   #   uses: actions/upload-artifact@v6
    #   with:
    #     name: test-results-productservice-${{ github.run_number }}
    # #    path: tests/ProductService.Tests/TestResults/*.trx
@@ -67,7 +67,7 @@ jobs:
 
    # - name: Upload code coverage
    #   if: always()
-   #  uses: actions/upload-artifact@v5
+   #  uses: actions/upload-artifact@v6
    #   with:
    #     name: coverage-productservice-${{ github.run_number }}
    #    path: tests/ProductService.Tests/TestResults/*/coverage.opencover.xml
@@ -79,7 +79,7 @@ jobs:
       run: dotnet publish --configuration Release --no-build --output ./publish
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: productservice-build-${{ github.run_number }}
         path: src/ProductService/publish/
