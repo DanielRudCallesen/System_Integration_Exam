@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/Tests/">
+    <Project Path="tests/AuthService.Tests/AuthService.Tests.csproj" />
+    <Project Path="tests/GatewayService.Tests/GateService.Tests.csproj" />
+    <Project Path="tests/ProductService.Tests/ProductService.Tests.csproj" />
+  </Folder>
   <Project Path="src/AuthService/AuthService.csproj" />
   <Project Path="src/GatewayService/GatewayService.csproj" />
   <Project Path="src/ProductService/ProductService.csproj" />

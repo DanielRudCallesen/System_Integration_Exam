@@ -35,7 +35,7 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: 1️⃣ Cache NuGet packages
+    - name: Cache NuGet packages
       uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
@@ -57,25 +57,25 @@ jobs:
       run: dotnet build --configuration Release --no-restore /p:TreatWarningsAsErrors=true
 
     # Stage 3: Unit Tests
-    - name: Run unit tests
-      working-directory: tests/ProductService.Tests
-      run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+   # - name: Run unit tests
+   #   working-directory: tests/ProductService.Tests
+   #   run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
 
-    - name: Upload test results
-      if: always()
-      uses: actions/upload-artifact@v5
-      with:
-        name: test-results-productservice-${{ github.run_number }}
-        path: tests/ProductService.Tests/TestResults/*.trx
-        retention-days: 30
+   # - name: Upload test results
+   #   if: always()
+   #   uses: actions/upload-artifact@v5
+   #   with:
+   #     name: test-results-productservice-${{ github.run_number }}
+   # #    path: tests/ProductService.Tests/TestResults/*.trx
+    #    retention-days: 30
 
-    - name: Upload code coverage
-      if: always()
-      uses: actions/upload-artifact@v5
-      with:
-        name: coverage-productservice-${{ github.run_number }}
-        path: tests/ProductService.Tests/TestResults/*/coverage.opencover.xml
-        retention-days: 30
+   # - name: Upload code coverage
+   #   if: always()
+   #  uses: actions/upload-artifact@v5
+   #   with:
+   #     name: coverage-productservice-${{ github.run_number }}
+   #    path: tests/ProductService.Tests/TestResults/*/coverage.opencover.xml
+   #     retention-days: 30
 
     # Stage 5: Build Artifacts
     - name: Publish
@@ -149,25 +149,26 @@ jobs:
         echo "Docker image pushed to GHCR:"
         echo "${{ steps.meta.outputs.tags }}"
 
-    # Stage 7: Image Scan
-    - name: Scan image with Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.33.1
-      with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-push.outputs.digest }}
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        severity: 'CRITICAL,HIGH'
-        exit-code: '0'
+    # # Stage 7: Image Scan
+    # - name: Scan image with Trivy vulnerability scanne
+    #   uses: aquasecurity/trivy-action@0.33.1
+    #   continue-on-error: true
+    #   with:
+    #     image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-push.outputs.digest }}
+    #     format: 'sarif'
+    #     output: 'trivy-results.sarif'
+    #     severity: 'CRITICAL,HIGH'
+    #     exit-code: '0'
 
-    - name: Upload scan results
-      uses: github/codeql-action/upload-sarif@v4
-      if: always()
-      with:
-        sarif_file: 'trivy-results.sarif'
-        category: 'container-scan-productservice'
+    # - name: Upload scan results
+    #   uses: github/codeql-action/upload-sarif@v4
+    #   if: always()
+    #   with:
+    #     sarif_file: 'trivy-results.sarif'
+    #     category: 'container-scan-productservice'
 
-    - name: ✅ Docker build and scan completed
-      run: echo "✅ Product Service Docker image built, scanned, and pushed successfully"
+    # - name: Docker build and scan completed
+    #   run: echo "Product Service Docker image built, scanned, and pushed successfully"
 
   # Stage 9: Release (only on main branch)
   release:

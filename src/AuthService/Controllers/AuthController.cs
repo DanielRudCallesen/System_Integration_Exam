@@ -26,12 +26,12 @@ namespace AuthService.Controllers
         [HttpPost("token")]
         public IActionResult GenerateToken([FromBody] TokenRequest request)
         {
-            if(string.IsNullOrEmpty(request.Username))
+            if (string.IsNullOrEmpty(request.Username))
             {
                 return BadRequest(new { error = "Username is required" });
             }
 
-            var jwtKey = _configuration["Jwt:Key"] ?? "MySecretKeyForDevelopment1234567890";
+            var jwtKey = _configuration["Jwt:Key"] ?? "MySecretKeyForDevelopment123456789dasdsrdftwertwesdgsdgsdfd";
             var jwtIssuer = _configuration["Jwt:Issuer"] ?? "AuthService";
             var jwtAudience = _configuration["Jwt:Audience"] ?? "MicroservicesApp";
 

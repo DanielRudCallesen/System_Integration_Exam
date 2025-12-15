@@ -6,6 +6,5 @@ namespace GatewayService.Controllers
     [Route("[controller]")]
     public class GatewayController : ControllerBase
     {
-        
     }
 }

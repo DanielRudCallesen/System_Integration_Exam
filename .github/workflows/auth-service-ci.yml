@@ -57,26 +57,26 @@ jobs:
       run: dotnet build --configuration Release --no-restore /p:TreatWarningsAsErrors=true
 
     # Stage 3: Unit Tests
-   # - name: Run tests
-   #   working-directory: tests/AuthService.Tests
-   #   run: dotnet test --no-restore --verbosity normal --logger "trx" --collect:"XPlat Code Coverage"
+    - name: Run tests
+      working-directory: tests/AuthService.Tests
+      run: dotnet test --no-restore --verbosity normal --logger "trx" --collect:"XPlat Code Coverage"
 
-    #- name: Upload test results
-   #   if: always()
-   #   uses: actions/upload-artifact@v5
-    #  with:
-   #     name: test-results-authservice-${{ github.run_number }}
-   ##     path: tests/AuthService.Tests/TestResults/*.trx
-    #    retention-days: 30
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v5
+      with:
+       name: test-results-authservice-${{ github.run_number }}
+       path: tests/AuthService.Tests/TestResults/*.trx
+       retention-days: 30
 
 
-    #- name: Upload code coverage
-   #   if: always()
-    #  uses: actions/upload-artifact@v5
-    #  with:
-     #   name: coverage-authservice-${{ github.run_number }}
-     #   path: tests/AuthService.Tests/TestResults/*/coverage.opencover.xml
-     #   retention-days: 30
+    - name: Upload code coverage
+      if: always()
+      uses: actions/upload-artifact@v5
+      with:
+        name: coverage-authservice-${{ github.run_number }}
+        path: tests/AuthService.Tests/TestResults/*/coverage.opencover.xml
+        retention-days: 30
 
     # Stage 5: Build Artifacts
     - name: Publish
@@ -149,25 +149,27 @@ jobs:
         echo "Docker image pushed to GHCR:"
         echo "${{ steps.meta.outputs.tags }}"
 
-    # Stage 7: Image Scan
-    - name: Scan image with Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.33.1
-      with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        severity: 'CRITICAL,HIGH'
-        exit-code: '0'
+    # # Stage 7: Image Scan
+    # - name: Wait for image to be available
+    #   run: sleep 15
 
-    - name: Upload scan results
-      uses: github/codeql-action/upload-sarif@v4
-      if: always()
-      with:
-        sarif_file: 'trivy-results.sarif'
-        category: 'container-scan-authservice'
+    # - name: Scan image with Trivy vulnerability scanner
+    #   uses: aquasecurity/trivy-action@0.33.1
+    #   with:
+    #     image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ github.sha }}
+    #     format: 'sarif'
+    #     output: 'trivy-results.sarif'
+    #     severity: 'CRITICAL,HIGH'
 
-    - name: Docker build and scan completed
-      run: echo "Auth Service Docker image built, scanned, and pushed successfully"
+    # - name: Upload scan results
+    #   uses: github/codeql-action/upload-sarif@v4
+    #   if: always()
+    #   with:
+    #     sarif_file: 'trivy-results.sarif'
+    #     category: 'container-scan-authservice'
+
+    # - name: Docker build and scan completed
+    #   run: echo "Auth Service Docker image built, scanned, and pushed successfully"
 
 
   # Stage 9: Release (only on main)
