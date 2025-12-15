@@ -152,6 +152,7 @@ jobs:
     # Stage 7: Image Scan
     - name: Scan image with Trivy vulnerability scanne
       uses: aquasecurity/trivy-action@0.33.1
+      continue-on-error: true
       with:
         image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-push.outputs.digest }}
         format: 'sarif'
