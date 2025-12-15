@@ -8,11 +8,8 @@ on:
       - 'tests/GatewayService.Tests/**'
       - '.github/workflows/gateway-service-ci.yml'
   push:
-    branches: [ develop, main ]
-    paths:
-      - 'src/GatewayService/**'
-      - 'tests/GatewayService.Tests/**'
-      - '.github/workflows/gateway-service-ci.yml'
+    branches: [ develop, main]
+
 
 env:
   DOTNET_VERSION: '10.0.x'
