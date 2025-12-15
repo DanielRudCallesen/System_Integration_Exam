@@ -9,10 +9,6 @@ on:
       - '.github/workflows/gateway-service-ci.yml'
   push:
     branches: [ develop, master ]
-    paths:
-      - 'src/GatewayService/**'
-      - 'tests/GatewayService.Tests/**'
-      - '.github/workflows/gateway-service-ci.yml'
 
 env:
   DOTNET_VERSION: '10.0.x'

@@ -9,10 +9,6 @@ on:
       - '.github/workflows/auth-service-ci.yml'
   push:
     branches: [ develop, master ]
-    paths:
-      - 'src/AuthService/**'
-      - 'tests/AuthService.Tests/**'
-      - '.github/workflows/auth-service-ci.yml'
 
 env:
   DOTNET_VERSION: '10.0.x'
