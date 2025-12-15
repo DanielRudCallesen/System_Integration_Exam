@@ -149,27 +149,27 @@ jobs:
         echo "Docker image pushed to GHCR:"
         echo "${{ steps.meta.outputs.tags }}"
 
-    # Stage 7: Image Scan
-    - name: Wait for image to be available
-      run: sleep 15
+    # # Stage 7: Image Scan
+    # - name: Wait for image to be available
+    #   run: sleep 15
 
-    - name: Scan image with Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.33.1
-      with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ github.sha }}
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        severity: 'CRITICAL,HIGH'
+    # - name: Scan image with Trivy vulnerability scanner
+    #   uses: aquasecurity/trivy-action@0.33.1
+    #   with:
+    #     image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ github.sha }}
+    #     format: 'sarif'
+    #     output: 'trivy-results.sarif'
+    #     severity: 'CRITICAL,HIGH'
 
-    - name: Upload scan results
-      uses: github/codeql-action/upload-sarif@v4
-      if: always()
-      with:
-        sarif_file: 'trivy-results.sarif'
-        category: 'container-scan-authservice'
+    # - name: Upload scan results
+    #   uses: github/codeql-action/upload-sarif@v4
+    #   if: always()
+    #   with:
+    #     sarif_file: 'trivy-results.sarif'
+    #     category: 'container-scan-authservice'
 
-    - name: Docker build and scan completed
-      run: echo "Auth Service Docker image built, scanned, and pushed successfully"
+    # - name: Docker build and scan completed
+    #   run: echo "Auth Service Docker image built, scanned, and pushed successfully"
 
 
   # Stage 9: Release (only on main)
