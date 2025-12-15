@@ -73,7 +73,7 @@ jobs:
       uses: actions/upload-artifact@v5
       with:
         name: coverage-authservice-${{ github.run_number }}
-        path: tests/AuthService.Tests/TestResults/**/*/coverage.cobertura.xml
+        path: tests/AuthService.Tests/TestResults/**/coverage.cobertura.xml
         retention-days: 30
 
     # Stage 5: Build Artifacts
