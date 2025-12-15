@@ -55,6 +55,7 @@ jobs:
 
     # Stage 3: Unit Tests
     - name: Run tests
+      id: test
       working-directory: tests/AuthService.Tests
       run: dotnet test --no-restore --verbosity normal --logger "trx" --collect:"XPlat Code Coverage"
 
@@ -63,7 +64,7 @@ jobs:
       uses: actions/upload-artifact@v5
       with:
        name: test-results-authservice-${{ github.run_number }}
-       path: tests/AuthService.Tests/TestResults/*.trx
+       path: tests/AuthService.Tests/TestResults/**/*.trx
        retention-days: 30
 
 
@@ -72,7 +73,7 @@ jobs:
       uses: actions/upload-artifact@v5
       with:
         name: coverage-authservice-${{ github.run_number }}
-        path: tests/AuthService.Tests/TestResults/*/coverage.opencover.xml
+        path: tests/AuthService.Tests/TestResults/**/coverage.cobertura.xml
         retention-days: 30
 
     # Stage 5: Build Artifacts
