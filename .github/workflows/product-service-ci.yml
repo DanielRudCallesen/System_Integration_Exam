@@ -8,11 +8,7 @@ on:
       - 'tests/ProductService.Tests/**'
       - '.github/workflows/product-service-ci.yml'
   push:
-    branches: [ develop, main ]
-    paths:
-      - 'src/ProductService/**'
-      - 'tests/ProductService.Tests/**'
-      - '.github/workflows/product-service-ci.yml'
+    branches: [ develop, main]
 
 env:
   DOTNET_VERSION: '10.0.x'
