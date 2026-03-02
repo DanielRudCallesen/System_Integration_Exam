@@ -61,7 +61,7 @@ jobs:
 
     - name: Upload test results
       if: always()
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
        name: test-results-authservice-${{ github.run_number }}
        path: tests/AuthService.Tests/TestResults/**/*.trx
@@ -70,7 +70,7 @@ jobs:
 
     - name: Upload code coverage
       if: always()
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: coverage-authservice-${{ github.run_number }}
         path: tests/AuthService.Tests/TestResults/**/coverage.cobertura.xml
@@ -82,7 +82,7 @@ jobs:
       run: dotnet publish --configuration Release --output ./publish
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: authservice-build-${{ github.run_number }}
         path: src/AuthService/publish/

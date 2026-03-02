@@ -59,7 +59,7 @@ jobs:
 
    # - name: Upload test results
    #   if: always()
-   #   uses: actions/upload-artifact@v6
+   #   uses: actions/upload-artifact@v7
    #   with:
    #     name: test-results-productservice-${{ github.run_number }}
    # #    path: tests/ProductService.Tests/TestResults/*.trx
@@ -67,7 +67,7 @@ jobs:
 
    # - name: Upload code coverage
    #   if: always()
-   #  uses: actions/upload-artifact@v6
+   #  uses: actions/upload-artifact@v7
    #   with:
    #     name: coverage-productservice-${{ github.run_number }}
    #    path: tests/ProductService.Tests/TestResults/*/coverage.opencover.xml
@@ -79,7 +79,7 @@ jobs:
       run: dotnet publish --configuration Release --no-build --output ./publish
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: productservice-build-${{ github.run_number }}
         path: src/ProductService/publish/
